@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../css(所有网页公共样式表).css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>默认构造函数 - 阿东的知识库</title>
+</head>
+<body>
+    <!-- 头部区域 -->
+    <div class="header">
+        <h1>阿东的知识库</h1>
+    </div>
+    <!-- 开启弹性布局 -->
+    <div class="container">
+        <!-- 侧边栏 -->
+        <div class="sidebar">
+            <div id="target"></div>
+        </div>
+        <!-- 主内容区域 -->
+        <div class="main-content">
+            <h2>默认构造函数（空构造函数）</h2>
+            <p>当类未定义任何构造函数时，编译器会自动生成默认构造函数（无参数、无自定义逻辑）。</p>
+
+            <hr>
+
+            <h2>构造函数的作用</h2>
+            <p>构造函数是类的特殊成员函数，其核心作用是在创建类的实例（对象）时被自动调用，用于完成对象成员属性的初始化操作。默认构造函数虽无自定义逻辑，但会确保对象的基础结构被正确初始化（如对内置类型成员不做显式赋值，对自定义类型成员调用其默认构造函数）。</p>
+        </div>
+    </div>
+
+    <script>
+        async function loadHtmlFile(url) {
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                const htmlContent = await response.text();
+                document.getElementById('target').innerHTML = htmlContent;
+            } catch (error) {
+                console.error('加载文件失败:', error);
+            }
+        }
+        // 加载导航栏
+        loadHtmlFile("./导航栏(面向对象公共区域).html");
+    </script>
+</body>
+</html>

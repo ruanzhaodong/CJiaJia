@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../css(所有网页公共样式表).css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>默认析构函数 - 阿东的知识库</title>
+</head>
+<body>
+    <!-- 头部区域 -->
+    <div class="header">
+        <h1>阿东的知识库</h1>
+    </div>
+    <!-- 开启弹性布局 -->
+    <div class="container">
+        <!-- 侧边栏 -->
+        <div class="sidebar">
+            <div id="target"></div>
+        </div>
+        <!-- 主内容区域 -->
+        <div class="main-content">
+            <h2>默认析构函数（空析构函数）</h2>
+            <p>当类未自定义析构函数时，编译器会自动生成默认析构函数（无参数、无自定义逻辑）。</p>
+
+            <hr>
+
+            <h2>析构函数的作用</h2>
+            <p>析构函数是类的特殊成员函数，其核心作用是在类的实例（对象）生命周期结束时被自动调用，用于释放对象在生命周期内申请的堆区内存等资源。默认析构函数会自动调用对象中自定义类型成员的析构函数，确保资源释放的完整性；对于内置类型成员，默认析构函数不做额外处理。</p>
+        </div>
+    </div>
+
+    <script>
+        async function loadHtmlFile(url) {
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                const htmlContent = await response.text();
+                document.getElementById('target').innerHTML = htmlContent;
+            } catch (error) {
+                console.error('加载文件失败:', error);
+            }
+        }
+        // 加载导航栏
+        loadHtmlFile("./导航栏(面向对象公共区域).html");
+    </script>
+</body>
+</html>

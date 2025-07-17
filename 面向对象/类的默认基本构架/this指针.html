@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../css(所有网页公共样式表).css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>this指针 - 阿东的知识库</title>
+</head>
+<body>
+    <!-- 头部区域 -->
+    <div class="header">
+        <h1>阿东的知识库</h1>
+    </div>
+    <!-- 开启弹性布局 -->
+    <div class="container">
+        <!-- 侧边栏 -->
+        <div class="sidebar">
+            <div id="target"></div>
+        </div>
+        <!-- 主内容区域 -->
+        <div class="main-content">
+            <h2>this指针</h2>
+            <p>在类的所有实例成员函数中，编译器会隐式添加一个指向当前对象的指针参数，即this指针。</p>
+
+            <hr>
+
+            <h2>this指针的特性</h2>
+            <ul>
+                <li>this指针是本类类型的指针，作为实例成员函数的第一个形参（编译器自动添加）；</li>
+                <li>在调用实例成员函数时，编译器会自动将当前对象的地址作为this指针的实参，传递给函数的第一个参数；</li>
+                <li>编译阶段，编译器会对所有实例成员函数的参数列表进行重构（添加this指针作为首个参数），同时对函数调用的实参列表进行重构（补充当前对象地址作为this指针的实参）。</li>
+            </ul>
+
+            <hr>
+
+            <h2>this指针的作用</h2>
+            <p>this指针的存在确保了实例成员函数能够准确识别并操作当前对象的成员属性和其他成员函数，避免了多对象场景下的成员访问冲突。</p>
+        </div>
+    </div>
+
+    <script>
+        async function loadHtmlFile(url) {
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                const htmlContent = await response.text();
+                document.getElementById('target').innerHTML = htmlContent;
+            } catch (error) {
+                console.error('加载文件失败:', error);
+            }
+        }
+        // 加载导航栏
+        loadHtmlFile("./导航栏(面向对象公共区域).html");
+    </script>
+</body>
+</html>
