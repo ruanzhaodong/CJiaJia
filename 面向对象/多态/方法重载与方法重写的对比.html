@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../../css(所有网页公共样式表).css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>阿东的知识库 - 方法重写与方法重载的对比</title>
+</head>
+<body>
+    <!-- 头部区域 -->
+    <div class="header">
+        <h1>阿东的知识库</h1>
+    </div>
+    <!-- 开启弹性布局 -->
+    <div class="container">
+        <!-- 侧边栏 -->
+        <div class="sidebar">
+            <div id="target"></div>
+        </div>
+        <!-- 主内容区域 -->
+        <div class="main-content">
+            <h2>方法重写（Override）与方法重载（Overload）的对比</h2>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>特性</th>
+                        <th>方法重写（Override）</th>
+                        <th>方法重载（Overload）</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>作用域</td>
+                        <td>发生在基类与派生类之间</td>
+                        <td>发生在同一类中或全局作用域</td>
+                    </tr>
+                    <tr>
+                        <td>目的</td>
+                        <td>隐藏实现细节，统一接口，支持动态多态</td>
+                        <td>复用函数名，处理不同参数场景，提高代码简洁性</td>
+                    </tr>
+                    <tr>
+                        <td>函数签名要求</td>
+                        <td>必须与基类虚函数完全相同（协变返回值除外，即基类返回基类指针/引用时，派生类可返回派生类指针/引用）</td>
+                        <td>参数列表必须不同（参数类型、个数、顺序至少有一项不同），返回值可不同</td>
+                    </tr>
+                    <tr>
+                        <td>绑定时机</td>
+                        <td>运行时动态绑定（通过虚函数表实现）</td>
+                        <td>编译时静态绑定（由编译器根据参数匹配确定）</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        async function loadHtmlFile(url) {
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                const htmlContent = await response.text();
+                document.getElementById('target').innerHTML = htmlContent;
+            } catch (error) {
+                console.error('加载文件失败:', error);
+            }
+        }
+        loadHtmlFile("../导航栏(面向对象公共区域).html");
+    </script>
+</body>
+</html>

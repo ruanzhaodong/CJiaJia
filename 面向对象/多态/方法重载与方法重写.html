@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../../css(所有网页公共样式表).css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>阿东的知识库 - 方法重载与方法重写</title>
+</head>
+<body>
+    <!-- 头部区域 -->
+    <div class="header">
+        <h1>阿东的知识库</h1>
+    </div>
+    <!-- 开启弹性布局 -->
+    <div class="container">
+        <!-- 侧边栏 -->
+        <div class="sidebar">
+            <div id="target"></div>
+        </div>
+        <!-- 主内容区域 -->
+        <div class="main-content">
+            <h2>方法重载与方法重写</h2>
+            
+            <h3>一、方法重载</h3>
+            <p>允许在同一作用域内声明多个同名函数或方法，前提是这些同名函数的参数列表必须满足以下重载条件之一：</p>
+            <ol>
+                <li>参数类型不同（例如：`void func(int a)`与`void func(float a)`）</li>
+                <li>参数个数不同（例如：`void func(int a)`与`void func(int a, int b)`）</li>
+                <li>参数顺序不同（例如：`void func(int a, float b)`与`void func(float a, int b)`）</li>
+            </ol>
+            <p><strong>注意：</strong>仅返回值类型不同不能作为重载的依据，例如`int func()`与`void func()`无法构成重载。</p>
+            
+            <h3>二、方法重写</h3>
+            <p>指派生类对基类中声明为虚函数的方法进行重新实现，以满足派生类的特定需求，实现"一个接口，多种实现"的效果，从而隐藏具体的实现细节。</p>
+            <p><strong>关键要求：</strong></p>
+            <ul>
+                <li>基类中的函数必须声明为`virtual`（虚函数），否则派生类的同名函数会"隐藏"基类函数，而非"重写"。</li>
+                <li>派生类重写的函数必须与基类虚函数的函数签名（参数列表、返回值类型，协变返回值除外）完全一致。</li>
+                <li>当使用基类指针或引用指向派生类对象时，调用该虚函数会自动触发派生类的重写版本，这是动态多态的核心表现。</li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        async function loadHtmlFile(url) {
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                const htmlContent = await response.text();
+                document.getElementById('target').innerHTML = htmlContent;
+            } catch (error) {
+                console.error('加载文件失败:', error);
+            }
+        }
+        loadHtmlFile("../导航栏(面向对象公共区域).html");
+    </script>
+</body>
+</html>

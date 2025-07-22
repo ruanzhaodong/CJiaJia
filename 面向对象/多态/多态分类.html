@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../../css(所有网页公共样式表).css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>阿东的知识库 - 多态的分类</title>
+</head>
+<body>
+    <!-- 头部区域 -->
+    <div class="header">
+        <h1>阿东的知识库</h1>
+    </div>
+    <!-- 开启弹性布局 -->
+    <div class="container">
+        <!-- 侧边栏 -->
+        <div class="sidebar">
+            <div id="target"></div>
+        </div>
+        <!-- 主内容区域 -->
+        <div class="main-content">
+            <h2>多态的分类</h2>
+            <p>在C++中，多态根据其实现机制和绑定时机的不同，可分为以下两类：</p>
+            <ul>
+                <li><strong>静态多态</strong>：依靠方法重载实现，在编译阶段就能够确定调用的具体函数，因此也被称为编译时多态。其核心是通过编译器对函数参数的匹配，确定最终执行的函数版本。</li>
+                <li><strong>动态多态</strong>：依靠方法重写与虚函数表（vtable）、虚指针（vptr）实现，在程序运行阶段才能确定调用的函数，因此也被称为运行时多态。虚函数表用于存储类中虚函数的地址，虚指针则指向该表，是实现动态绑定的关键。</li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        async function loadHtmlFile(url) {
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                const htmlContent = await response.text();
+                document.getElementById('target').innerHTML = htmlContent;
+            } catch (error) {
+                console.error('加载文件失败:', error);
+            }
+        }
+        loadHtmlFile("../导航栏(面向对象公共区域).html");
+    </script>
+</body>
+</html>
