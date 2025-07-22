@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../../css(所有网页公共样式表).css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>虚继承 - 阿东的知识库</title>
+</head>
+<body>
+    <!-- 头部区域 -->
+    <div class="header">
+        <h1>阿东的知识库</h1>
+    </div>
+    <!-- 开启弹性布局 -->
+    <div class="container">
+        <!-- 侧边栏 -->
+        <div class="sidebar">
+            <div id="target"></div>
+        </div>
+        <!-- 主内容区域 -->
+        <div class="main-content">
+            <h2>虚继承</h2>
+            <p>虚继承是C++中用于解决菱形继承（钻石继承）问题的特殊继承方式，通过让间接父类在派生类中只保留一份实例，避免数据冗余和访问冲突。</p>
+            <p>声明格式：在继承方式前添加<code>virtual</code>关键字，如<code>class B : virtual public A { ... };</code>。</p>
+
+            <hr>
+
+            <h2>菱形继承的问题</h2>
+            <p>菱形继承是多继承的一种特殊场景，结构如下：</p>
+            <ul>
+                <li>类A是基类；</li>
+                <li>类B和类C分别继承自类A；</li>
+                <li>类D同时继承自类B和类C。</li>
+            </ul>
+            <p>此时类D会间接继承类A的两份数据（分别来自B和C），导致：</p>
+            <ul>
+                <li><strong>数据冗余</strong>：同一基类的数据在子类中重复存储；</li>
+                <li><strong>访问歧义</strong>：访问类A的成员时，编译器无法确定访问的是来自B的副本还是C的副本，导致编译错误。</li>
+            </ul>
+
+            <hr>
+
+            <h2>虚继承的解决原理</h2>
+            <p>虚继承通过以下机制解决菱形继承问题：</p>
+            <ul>
+                <li>被虚继承的基类（如A）在派生类（如B、C）中不直接存储实例，而是通过“虚基类表指针”指向全局唯一的基类实例；</li>
+                <li>最终子类（如D）继承B和C时，只会保留一份基类A的实例，所有派生类共享这一份数据。</li>
+            </ul>
+
+            <hr>
+
+            <h2>虚继承的使用注意事项</h2>
+            <ul>
+                <li>虚继承需在间接派生类（如B、C）继承基类（A）时声明，而非在最终子类（D）中声明；</li>
+                <li>虚继承会增加一定的内存开销（虚基类表指针）和运行时开销，不宜滥用；</li>
+                <li>虚基类的构造函数由最终子类（如D）负责初始化，而非中间派生类（B、C），这是与普通继承的重要区别。</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        async function loadHtmlFile(url) {
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                const htmlContent = await response.text();
+                document.getElementById('target').innerHTML = htmlContent;
+            } catch (error) {
+                console.error('加载文件失败:', error);
+            }
+        }
+        // 加载导航栏
+        loadHtmlFile("../导航栏(面向对象公共区域).html");
+    </script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../../css(所有网页公共样式表).css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>继承方式 - 阿东的知识库</title>
+</head>
+<body>
+    <!-- 头部区域 -->
+    <div class="header">
+        <h1>阿东的知识库</h1>
+    </div>
+    <!-- 开启弹性布局 -->
+    <div class="container">
+        <!-- 侧边栏 -->
+        <div class="sidebar">
+            <div id="target"></div>
+        </div>
+        <!-- 主内容区域 -->
+        <div class="main-content">
+            <h2>继承方式</h2>
+            <p>继承方式用于控制父类成员在子类中的访问权限，C++提供三种继承方式：public（公有继承）、protected（保护继承）、private（私有继承）。继承方式的本质是“调整父类成员在子类中的可见性”，不改变父类成员在自身类中的原始权限。</p>
+
+            <hr>
+
+            <h2>继承方式对成员权限的影响（表格对比）</h2>
+            <table border="1" cellpadding="8" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>父类成员原始权限</th>
+                        <th>public继承后在子类中的权限</th>
+                        <th>protected继承后在子类中的权限</th>
+                        <th>private继承后在子类中的权限</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>public</td>
+                        <td>public</td>
+                        <td>protected</td>
+                        <td>private</td>
+                    </tr>
+                    <tr>
+                        <td>protected</td>
+                        <td>protected</td>
+                        <td>protected</td>
+                        <td>private</td>
+                    </tr>
+                    <tr>
+                        <td>private</td>
+                        <td>不可访问</td>
+                        <td>不可访问</td>
+                        <td>不可访问</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr>
+
+            <h2>1. public（公有继承）</h2>
+            <p>公有继承是最常用的继承方式，父类成员在子类中保留原始访问权限：</p>
+            <ul>
+                <li>父类的public成员→子类中仍为public（可被子类外部访问）；</li>
+                <li>父类的protected成员→子类中仍为protected（仅子类和子类的派生类可访问）；</li>
+                <li>父类的private成员→子类中不可访问（继承但无访问权限）。</li>
+            </ul>
+            <p>适用场景：表达“is-a”关系（如“学生is-a人”），子类是父类的特殊类型，需保留父类的公有接口。</p>
+
+            <hr>
+
+            <h2>2. protected（保护继承）</h2>
+            <p>保护继承会将父类的公有成员降级为保护成员，保护成员保持不变：</p>
+            <ul>
+                <li>父类的public成员→子类中变为protected（仅子类和子类的派生类可访问）；</li>
+                <li>父类的protected成员→子类中仍为protected；</li>
+                <li>父类的private成员→子类中不可访问。</li>
+            </ul>
+            <p>适用场景：子类需要复用父类功能，但不希望父类的公有接口被外部直接访问（如“工具类”的继承，仅内部使用父类功能）。</p>
+
+            <hr>
+
+            <h2>3. private（私有继承）</h2>
+            <p>私有继承会将父类的公有和保护成员均降级为私有成员：</p>
+            <ul>
+                <li>父类的public成员→子类中变为private（仅子类自身可访问，子类的派生类不可访问）；</li>
+                <li>父类的protected成员→子类中变为private；</li>
+                <li>父类的private成员→子类中不可访问。</li>
+            </ul>
+            <p>注意：私有继承的父类成员在子类中成为私有成员，子类的派生类无法访问这些成员。适用场景：纯代码复用（“has-a”关系的一种实现，如“汽车has-a发动机”，复用发动机功能但不暴露其接口）。</p>
+        </div>
+    </div>
+
+    <script>
+        async function loadHtmlFile(url) {
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                const htmlContent = await response.text();
+                document.getElementById('target').innerHTML = htmlContent;
+            } catch (error) {
+                console.error('加载文件失败:', error);
+            }
+        }
+        // 加载导航栏
+        loadHtmlFile("../导航栏(面向对象公共区域).html");
+    </script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../../css(所有网页公共样式表).css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>多继承 - 阿东的知识库</title>
+</head>
+<body>
+    <!-- 头部区域 -->
+    <div class="header">
+        <h1>阿东的知识库</h1>
+    </div>
+    <!-- 开启弹性布局 -->
+    <div class="container">
+        <!-- 侧边栏 -->
+        <div class="sidebar">
+            <div id="target"></div>
+        </div>
+        <!-- 主内容区域 -->
+        <div class="main-content">
+            <h2>多继承</h2>
+            <p>多继承是指一个子类同时继承多个父类的成员属性和成员方法，即允许一个类从两个或两个以上的基类派生。通过多继承，子类可以整合多个父类的功能，实现更复杂的业务逻辑。</p>
+            <p>声明格式：<code>class 子类名 : 继承方式1 父类1, 继承方式2 父类2, ... { 子类成员 };</code>（每个父类前需单独指定继承方式）。</p>
+
+            <hr>
+
+            <h2>多继承的优势</h2>
+            <ul>
+                <li><strong>功能整合</strong>：子类可同时拥有多个父类的功能，无需重复开发（如“手机”继承“通讯设备”和“娱乐设备”的功能）；</li>
+                <li><strong>灵活性高</strong>：相比单继承，能更灵活地表达类之间的复杂关系。</li>
+            </ul>
+
+            <hr>
+
+            <h2>多继承的潜在问题</h2>
+            <p>多继承虽灵活，但可能引发以下问题：</p>
+            <ul>
+                <li><strong>命名冲突</strong>：若多个父类拥有同名成员（属性或方法），子类访问时需通过“父类名::成员名”指定来源，否则会导致编译歧义；</li>
+                <li><strong>菱形继承问题</strong>：当多个父类共同继承自同一个基类时，子类会间接继承基类的多份数据，造成数据冗余和访问冲突（需通过虚继承解决，详见“虚继承”网页）；</li>
+                <li><strong>代码复杂度增加</strong>：多继承会使类层次关系更复杂，降低代码可读性和维护性。</li>
+            </ul>
+
+            <hr>
+
+            <h2>多继承的使用建议</h2>
+            <p>由于多继承可能带来复杂性，实际开发中建议：</p>
+            <ul>
+                <li>优先使用单继承+接口（纯虚类）组合替代多继承，减少冲突；</li>
+                <li>若必须使用多继承，避免多个父类有同名成员；</li>
+                <li>通过虚继承解决菱形继承的数据冗余问题。</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        async function loadHtmlFile(url) {
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                const htmlContent = await response.text();
+                document.getElementById('target').innerHTML = htmlContent;
+            } catch (error) {
+                console.error('加载文件失败:', error);
+            }
+        }
+        // 加载导航栏
+        loadHtmlFile("../导航栏(面向对象公共区域).html");
+    </script>
+</body>
+</html>
