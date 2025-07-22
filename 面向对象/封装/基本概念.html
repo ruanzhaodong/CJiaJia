@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../../css(所有网页公共样式表).css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>封装的基本概念 - 阿东的知识库</title>
+</head>
+<body>
+    <!-- 头部区域 -->
+    <div class="header">
+        <h1>阿东的知识库</h1>
+    </div>
+    <!-- 开启弹性布局 -->
+    <div class="container">
+        <!-- 侧边栏 -->
+        <div class="sidebar">
+            <div id="target"></div>
+        </div>
+        <!-- 主内容区域 -->
+        <div class="main-content">
+            <h2>封装的基本概念</h2>
+            <p>封装是面向对象编程的核心特性之一，其核心思想是将类的数据（成员属性）与操作这些数据的函数（成员方法）捆绑为一个有机整体，形成“类”这一基本单元。</p>
+            <p>通过访问权限修饰符（public、protected、private）对类的成员（属性和方法）进行修饰，可精确控制外部对类内部成员的访问权限，实现“信息隐藏”——即只暴露必要的接口给外部，隐藏内部实现细节，从而提高代码的安全性、可维护性和复用性。</p>
+        </div>
+    </div>
+
+    <script>
+        async function loadHtmlFile(url) {
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                const htmlContent = await response.text();
+                document.getElementById('target').innerHTML = htmlContent;
+            } catch (error) {
+                console.error('加载文件失败:', error);
+            }
+        }
+        // 加载导航栏
+        loadHtmlFile("../导航栏(面向对象公共区域).html");
+    </script>
+</body>
+</html>

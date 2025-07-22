@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../../css(所有网页公共样式表).css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>访问权限修饰符 - 阿东的知识库</title>
+</head>
+<body>
+    <!-- 头部区域 -->
+    <div class="header">
+        <h1>阿东的知识库</h1>
+    </div>
+    <!-- 开启弹性布局 -->
+    <div class="container">
+        <!-- 侧边栏 -->
+        <div class="sidebar">
+            <div id="target"></div>
+        </div>
+        <!-- 主内容区域 -->
+        <div class="main-content">
+            <h2>访问权限修饰符</h2>
+            <p>访问权限修饰符用于控制类的成员（成员属性和成员方法）在不同范围的访问权限，是封装机制的核心实现手段。C++中常用的访问权限修饰符有3种：public（公开的）、protected（保护的）、private（私人的）。</p>
+
+            <hr>
+
+            <h2>public（公开的）</h2>
+            <p>被public修饰的成员属于类的“公有接口”，是类对外暴露的功能入口。外部任何函数（包括全局函数、其他类的成员函数等）都可以直接访问或调用；类内部成员和子类也可自由访问。通常将类的核心功能方法、必要的属性访问接口（如getter/setter）声明为public。</p>
+
+            <hr>
+
+            <h2>protected（保护的）</h2>
+            <p>被protected修饰的成员是类与子类共享的“保护级资源”，主要用于类的继承扩展：</p>
+            <ul>
+                <li>类内部的成员函数可以自由访问；</li>
+                <li>子类的成员函数可以访问父类的protected成员（便于子类复用父类的部分实现）；</li>
+                <li>类外部的非子类函数无法直接访问，保证了资源的安全性。</li>
+            </ul>
+
+            <hr>
+
+            <h2>private（私人的）</h2>
+            <p>被private修饰的成员是类的“内部实现细节”，完全封装在类内部：</p>
+            <ul>
+                <li>仅能被类自身的成员函数访问或调用，确保内部逻辑不被外部干扰；</li>
+                <li>子类无法直接访问父类的private成员，保证了父类实现的独立性；</li>
+                <li>类外部的任何函数均无法直接访问，是封装性的核心体现。通常将类的私有属性、内部辅助方法声明为private。</li>
+            </ul>
+
+            <hr>
+
+             <h2>访问权限范围对比</h2>
+            <table border="1" cellpadding="8" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>修饰符</th>
+                        <th>类内部成员函数</th>
+                        <th>子类成员函数</th>
+                        <th>类外部非子类函数（全局函数/其他类成员函数）</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>public（公开的）</td>
+                        <td>可访问</td>
+                        <td>可访问</td>
+                        <td>可访问</td>
+                    </tr>
+                    <tr>
+                        <td>protected（保护的）</td>
+                        <td>可访问</td>
+                        <td>可访问（仅子类对父类的protected成员）</td>
+                        <td>不可访问</td>
+                    </tr>
+                    <tr>
+                        <td>private（私人的）</td>
+                        <td>可访问</td>
+                        <td>不可访问（子类无法访问父类的private成员）</td>
+                        <td>不可访问</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr>
+
+        </div>
+    </div>
+
+    <script>
+        async function loadHtmlFile(url) {
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                const htmlContent = await response.text();
+                document.getElementById('target').innerHTML = htmlContent;
+            } catch (error) {
+                console.error('加载文件失败:', error);
+            }
+        }
+        // 加载导航栏
+        loadHtmlFile("../导航栏(面向对象公共区域).html");
+    </script>
+</body>
+</html>

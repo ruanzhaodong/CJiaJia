@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../../css(所有网页公共样式表).css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>友元 - 阿东的知识库</title>
+</head>
+<body>
+    <!-- 头部区域 -->
+    <div class="header">
+        <h1>阿东的知识库</h1>
+    </div>
+    <!-- 开启弹性布局 -->
+    <div class="container">
+        <!-- 侧边栏 -->
+        <div class="sidebar">
+            <div id="target"></div>
+        </div>
+        <!-- 主内容区域 -->
+        <div class="main-content">
+            <h2>友元的基本概念</h2>
+            <p>友元是C++中一种打破封装机制的特殊机制：一个类可以声明其他实体（如其他类的成员函数、另一个类、全局函数）作为自己的“友元”，被声明为友元的实体可以无视该类的访问权限修饰符（public/protected/private），直接访问其所有成员（包括私有成员）。</p>
+            <p>友元机制的设计目的是在保证封装性的前提下，为特殊场景（如两个类关系密切需要互相访问内部成员）提供灵活的访问方式，但应谨慎使用（过度使用会破坏封装）。</p>
+
+            <hr>
+
+            <h2>友元的分类及声明方式</h2>
+            <p>友元分为三大类：其他类的成员函数作为友元函数、类作为友元类、全局函数作为友元函数。</p>
+
+            <hr>
+
+            <h2>1. 其他类的成员函数作为友元函数</h2>
+            <p>当类A需要让类B的某个成员函数访问自己的私有成员时，可在类A中声明类B的该成员函数为友元函数。</p>
+            <p>声明格式（在类A内部）：<code>friend 返回类型 B::方法名(参数列表);</code></p>
+            <p>注意：类B必须在类A之前声明，且该成员函数需在类B中已声明，否则会导致编译错误。此外，类的自身成员函数无需声明为友元，因为它们本身就可以访问所有成员。</p>
+
+            <hr>
+
+            <h2>2. 类作为友元类</h2>
+            <p>当类A声明类B为友元类时，类B的所有成员函数（包括实例函数和静态函数）都可以直接访问类A的所有成员（包括私有成员）。</p>
+            <p>声明格式（在类A内部）：<code>friend class B;</code></p>
+            <p>特性：友元关系是单向的（类B是类A的友元，不代表类A是类B的友元），且不可传递（类B是类A的友元，类C是类B的友元，不代表类C是类A的友元）。</p>
+
+            <hr>
+
+            <h2>3. 全局函数作为友元函数</h2>
+            <p>全局函数是定义在类外部的函数，当类A需要让某个全局函数访问自己的私有成员时，可在类A中声明该全局函数为友元函数。</p>
+            <p>声明格式（在类A内部）：<code>friend 返回类型 函数名(参数列表);</code></p>
+            <p>注意：全局函数需在类A之前声明，否则类A无法识别该函数。</p>
+        </div>
+    </div>
+
+    <script>
+        async function loadHtmlFile(url) {
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                const htmlContent = await response.text();
+                document.getElementById('target').innerHTML = htmlContent;
+            } catch (error) {
+                console.error('加载文件失败:', error);
+            }
+        }
+        // 加载导航栏
+        loadHtmlFile("../导航栏(面向对象公共区域).html");
+    </script>
+</body>
+</html>

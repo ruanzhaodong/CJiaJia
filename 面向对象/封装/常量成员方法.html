@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../../css(所有网页公共样式表).css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>常量成员方法 - 阿东的知识库</title>
+</head>
+<body>
+    <!-- 头部区域 -->
+    <div class="header">
+        <h1>阿东的知识库</h1>
+    </div>
+    <!-- 开启弹性布局 -->
+    <div class="container">
+        <!-- 侧边栏 -->
+        <div class="sidebar">
+            <div id="target"></div>
+        </div>
+        <!-- 主内容区域 -->
+        <div class="main-content">
+            <h2>常量成员方法</h2>
+            <p>常量成员方法是被const关键字修饰的类成员方法，用于保证在方法执行过程中不修改类的成员属性（除非有特殊声明），是封装中“只读接口”的重要实现方式。</p>
+
+            <hr>
+
+            <h2>常量成员方法的声明规则</h2>
+            <p>声明格式：<code>返回类型 方法名(参数列表) const { 方法体 }</code></p>
+            <p>注意：const关键字必须放在参数列表之后、方法体之前，用于标识该方法为常量成员方法。</p>
+
+            <hr>
+
+            <h2>常量成员方法的访问规则</h2>
+            <p>在常量成员方法中，对类的成员属性的操作受到严格限制：</p>
+            <ul>
+                <li>对于普通成员属性（未用mutable修饰）：只能读取其值，不能修改（编译阶段会报错）；</li>
+                <li>对于用<code>mutable</code>关键字声明的成员属性：既可以读取，也可以修改（mutable用于标识“即使在常量方法中也允许修改的成员”）。</li>
+            </ul>
+
+            <hr>
+
+            <h2>常量成员方法的作用</h2>
+            <p>常量成员方法主要用于：</p>
+            <ul>
+                <li>保证const对象（用const声明的类实例）只能调用常量成员方法，避免对象被意外修改；</li>
+                <li>明确区分“只读操作”和“修改操作”，增强代码的可读性和安全性；</li>
+                <li>作为类的“只读接口”，对外提供数据访问而不暴露修改权限。</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        async function loadHtmlFile(url) {
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                const htmlContent = await response.text();
+                document.getElementById('target').innerHTML = htmlContent;
+            } catch (error) {
+                console.error('加载文件失败:', error);
+            }
+        }
+        // 加载导航栏
+        loadHtmlFile("../导航栏(面向对象公共区域).html");
+    </script>
+</body>
+</html>
